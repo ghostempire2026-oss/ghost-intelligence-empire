@@ -8,7 +8,7 @@ import { useMemo } from 'react';
 import '@solana/wallet-adapter-react-ui/styles.css';
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  const network = 'mainnet-beta';   // Change to 'devnet' for testing
+  const network = 'mainnet-beta';
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
   
   const wallets = useMemo(() => [
