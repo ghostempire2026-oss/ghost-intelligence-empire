@@ -1,4 +1,3 @@
-@ -1,27 +0,0 @@
 'use client';
 
 import { Sidebar } from '@/components/Sidebar';
