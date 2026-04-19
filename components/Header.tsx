@@ -1,6 +1,14 @@
 'use client';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+
+import dynamic from 'next/dynamic';
 import { Ghost } from 'lucide-react';
+
+// Dynamically import WalletMultiButton to avoid SSR issues
+const WalletMultiButton = dynamic(
+  async () =>
+    (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
+  { ssr: false }
+);
 
 export function Header() {
   return (
@@ -12,6 +20,7 @@ export function Header() {
           <p className="text-emerald-400 text-sm">● LIVE • Real-time DEX • AI Swarm • $GHOST</p>
         </div>
       </div>
+
       <WalletMultiButton className="bg-emerald-600 hover:bg-emerald-500 px-6 py-2 rounded-2xl" />
     </header>
   );
