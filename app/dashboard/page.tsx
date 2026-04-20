@@ -1,13 +1,18 @@
-'use client';
 
-import { Sidebar } from '@/components/Sidebar';
-import { DashboardContent } from '@/components/DashboardContent';
+import { createClient } from '@/utils/supabase/server'
+import { cookies } from 'next/headers'
 
-export default function DashboardPage() {
+export default async function Page() {
+  const cookieStore = await cookies()
+  const supabase = createClient(cookieStore)
+
+  const { data: todos } = await supabase.from('todos').select()
+
   return (
-    <div className="flex h-screen bg-zinc-950 overflow-hidden">
-      <Sidebar />
-      <DashboardContent />
-    </div>
-  );
+    <ul>
+      {todos?.map((todo) => (
+        <li key={todo.id}>{todo.name}</li>
+      ))}
+    </ul>
+  )
 }
